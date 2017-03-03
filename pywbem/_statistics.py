@@ -186,7 +186,7 @@ class NamedStatistic(object):
 
         If the statistics container is disabled, this method does nothing.
 
-        Returns the time for this operation on None if not recorded
+        Returns the time for this operation or None if not recorded
         """
         if self.container.enabled:
             if self._start_time is None:
@@ -345,8 +345,8 @@ class Statistics(object):
             snapshot = sorted(self.snapshot(),
                               key=lambda item: item[1].avg_time,
                               reverse=True)
-            for name in snapshot:
-                ret += snapshot[name].formatted()
+            for name, stats in snapshot:
+                ret += stats.formatted()
         else:
             ret += "Disabled"
         return ret.strip()

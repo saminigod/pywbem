@@ -110,7 +110,7 @@ class ClientTest(unittest.TestCase):
         self.debug = CLI_ARGS['debug']
         self.yamlfile = CLI_ARGS['yamlfile']
         self.yamlfp = None
-        self.stats_enabled = False if CLI_ARGS['nostats'] else True
+        self.stats_enabled = True if CLI_ARGS['stats'] else False
         if self.stats_enabled:
             self.start_time = time.time()
 
@@ -6424,7 +6424,8 @@ def parse_args(argv_):
         print('    -nvc                Do not verify server certificates.')
         print('    --cacerts           File/dir with ca certificate(s).')
         print('    --yamlfile yamlfile  Test_client YAML file to be recorded.')
-        print('    -nostats            If set, statistics are not displayed.')
+        print('    -stats              If set, statistics are generated')
+        print('                        and displayed.')
         print('    UT_OPTS             Unittest options (see below).')
         print('    UT_CLASS            Name of testcase class (e.g.\n'
               '                        EnumerateInstances).')
@@ -6471,7 +6472,7 @@ def parse_args(argv_):
     args_['nvc'] = None
     args_['yamlfile'] = None
     args_['long_running'] = None
-    args_['nostats'] = None
+    args_['stats'] = None
 
     # options must proceed arguments
     while True:
@@ -6496,8 +6497,8 @@ def parse_args(argv_):
         elif argv[1] == '-d':
             args_['debug'] = True
             del argv[1:2]
-        elif argv[1] == '-nostats':
-            args_['nostats'] = True
+        elif argv[1] == '-stats':
+            args_['stats'] = True
             del argv[1:2]
         elif argv[1] == '-l':
             args_['long_running'] = True
@@ -6544,7 +6545,7 @@ def main():
         print("  cacerts: %s" % CLI_ARGS['cacerts'])
         print("  timeout: %s" % CLI_ARGS['timeout'])
         print("  verbose: %s" % CLI_ARGS['verbose'])
-        print("  nostats: %s" % CLI_ARGS['nostats'])
+        print("  stats: %s" % CLI_ARGS['stats'])
         print("  debug: %s" % CLI_ARGS['debug'])
         print("  yamlfile: %s" % CLI_ARGS['yamlfile'])
         print("  long_running: %s" % CLI_ARGS['long_running'])

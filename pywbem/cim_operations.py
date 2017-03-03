@@ -549,7 +549,7 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
 
        last_operation_time (:term:`time` or None):
         Time to execute the last operation.  This is available as a valid
-        number only subsequent to the execution of an operation and if
+        time number only subsequent to the execution of an operation and if
         `stats_enabled` is set.  Otherwise the value is `None`.
 
       last_raw_reply (:term:`unicode string`):
@@ -1425,10 +1425,11 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
 
             Exceptions described in :class:`~pywbem.WBEMConnection`.
         """
+
         exc = None
         instancenames = None
-
         method_name = 'EnumerateInstanceNames'
+
         if self.operation_recorder:
             self.operation_recorder.reset()
             self.operation_recorder.stage_pywbem_args(
@@ -1458,7 +1459,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 instancename.namespace = namespace
             return instancenames
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -1633,7 +1635,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 instance.path.namespace = namespace
             return instances
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -3797,7 +3800,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 *self._get_rslt_params(result, namespace))
             return result_tuple
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -4077,7 +4081,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 *self._get_rslt_params(result, namespace))
             return result_tuple
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -4291,7 +4296,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 *self._get_rslt_params(result, namespace))
             return result_tuple
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -4546,7 +4552,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 *self._get_rslt_params(result, namespace))
             return result_tuple
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -4778,7 +4785,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 *self._get_rslt_params(result, namespace))
             return result_tuple
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -5053,7 +5061,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 *self._get_rslt_params(result, namespace))
             return result_tuple
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -5263,7 +5272,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                                                    query_result_class)
             return result_tuple
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -5404,7 +5414,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 *self._get_rslt_params(result, namespace))
             return result_tuple
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -5541,7 +5552,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 *self._get_rslt_params(result, namespace))
             return result_tuple
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -5673,7 +5685,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 *self._get_rslt_params(result, namespace))
             return result_tuple
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -5740,7 +5753,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 **extra)
             return
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -5879,7 +5893,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
             instance.path.namespace = namespace
             return instance
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -6005,7 +6020,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 **extra)
             return
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -6110,7 +6126,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
             # TODO: Why not accept returned namespace?
             return instancename
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -6174,7 +6191,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 **extra)
             return
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -6327,7 +6345,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 objects = [x[2] for x in result[0][2]]
             return objects
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -6529,7 +6548,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 objects = [x[2] for x in result[0][2]]
             return objects
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -6661,7 +6681,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 objects = [x[2] for x in result[0][2]]
             return objects
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -6845,7 +6866,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 objects = [x[2] for x in result[0][2]]
             return objects
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -6999,7 +7021,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
             result_tuple = (returnvalue, output_params)
             return result_tuple
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -7096,7 +7119,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 instance.path.namespace = namespace
             return instances
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -7210,7 +7234,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 classnames = [x.classname for x in result[0][2]]
             return classnames
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -7358,7 +7383,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 classes = result[0][2]
             return classes
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -7489,7 +7515,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
 
             klass = result[0][2][0]
             return klass
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -7565,7 +7592,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 ModifiedClass=klass,
                 **extra)
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -7640,7 +7668,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 **extra)
             return
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -7714,7 +7743,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 **extra)
             return
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -7792,7 +7822,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 qualifiers = []
             return qualifiers
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -7870,7 +7901,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
             qualifiername = result[0][2][0]
             return qualifiername
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -7940,7 +7972,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 **extra)
             return
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
@@ -8008,7 +8041,8 @@ class WBEMConnection(object):  # pylint: disable=too-many-instance-attributes
                 **extra)
             return
 
-        except Exception as exc:
+        except Exception as exce:
+            exc = exce
             raise
         finally:
             self.last_operation_time = stats.stop_timer(exc)
