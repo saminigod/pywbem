@@ -98,6 +98,55 @@ shape in all supported Python environments, use Tox:
     $ tox -e py27                      # Run all tests on Python 2.7
 
 
+.. _`Developing Ipython Notebooks`:
+
+Developing PyWBEM Ipython Documentation Notebooks
+----------------------------
+
+The pywbem developers are using ipython notebooks to demonstrate the use of
+pywbem.  Today we generally have one notebook per operation or group of
+operations including definition of the operation, references back to the
+pywbem documentation, and one or more examples  (hopefully examples that
+will actually execute against a wbem server)
+
+These can easily be extended or supplemented using a local ipython or
+jupyter server by:
+
+1. Install ipython or Jupyter software using pip or pip3. The notebook server
+ may be installed as root or within a python virtual environment. For
+ example:
+
+::
+
+   $ sudo pip install ipython
+   or
+   $ sudo pip3 install ipython
+   or   
+   $ sudo pip install jupyter
+
+The notebook server may be installed as root or within a python virtual
+environment.
+  
+2. Start the local ipython notebook server in the notebook directory:
+
+   a. Go to the pywbem directory `pywbem/docs/notebooks`.
+   
+   b. Start the ipython server:
+
+::
+
+  $ ipython notebook
+  or      
+  $ jupyter notebook
+
+This will start the local ipython/juypter notebook server and on the first page
+displayed in your web browser all existing pywbem ipython notebooks will be
+available for editing. New ones can be created using the commands on that
+ipython server web page.
+
+New and changed notebooks must go through the same contribution process as other
+components of pywbem to be integrated into the github repository.
+
 .. _`Contributing`:
 
 Contributing

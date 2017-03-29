@@ -28,6 +28,9 @@ Tutorial                             Short description
 :nbview:`createdeleteinst.ipynb`     CreateInstance + DeleteInstance
 :nbview:`modifyinstance.ipynb`       ModifyInstance
 :nbview:`invokemethod.ipynb`         InvokeMethod
+:nbview:`pulloperations.ipynb`       The Pull Operations
+:nbview:`iterablecimoperations.ipynb` The Iter... Operations
+:nbview:`wbemserverclass.ipynb`      Pywbem WBEMServer Class
 :nbview:`subscriptionmanager.ipynb`  Subscription Manager
 ===================================  ==========================================
 
@@ -38,7 +41,6 @@ For the following topics, tutorials are not yet available:
 * Association Operations
 * Class Operations
 * Qualifier Operations
-* WBEMServer
 * WBEMListener
 * WBEMSubscriptionManager
 
