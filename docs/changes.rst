@@ -33,6 +33,10 @@ Enhancements
 * Added the MOF compiler API to the ``pywbem`` namespace. For compatibility, it
   is still available in the ``pywbem.mof_compiler`` namespace. See issue #634.
 
+* Add several new notebooks to the tutorials including notebooks for the
+  WBEMServer class, the pull operations, and the Iter operations. See issue
+  #682
+
 Bug fixes
 ^^^^^^^^^
 
