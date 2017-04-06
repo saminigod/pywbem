@@ -127,17 +127,15 @@ jupyter server by:
 The notebook server may be installed as root or within a python virtual
 environment.
   
-2. Start the local ipython notebook server in the notebook directory:
-
-   a. Go to the pywbem directory `pywbem/docs/notebooks`.
-   
-   b. Start the ipython server:
+2. Start the local ipython/jupyter notebook server in the notebook directory
+(`pywbem/docs/notebooks`) referencing that directory in the command line
+call:
 
 ::
 
-  $ ipython notebook
+  $ ipython notebook docs/notebooks
   or      
-  $ jupyter notebook
+  $ jupyter notebook docs/notebooks
 
 This will start the local ipython/juypter notebook server and on the first page
 displayed in your web browser all existing pywbem ipython notebooks will be
