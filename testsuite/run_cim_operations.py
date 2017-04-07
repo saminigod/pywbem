@@ -110,6 +110,9 @@ class ClientTest(unittest.TestCase):
         self.debug = CLI_ARGS['debug']
         self.yamlfile = CLI_ARGS['yamlfile']
         self.yamlfp = None
+        self.stats_enabled = False if CLI_ARGS['nostats'] else True
+        if self.stats_enabled:
+            self.start_time = time.time()
 
         # set this because python 3 http libs generate many ResourceWarnings
         # and unittest enables these warnings.
@@ -127,7 +130,8 @@ class ClientTest(unittest.TestCase):
             timeout=CLI_ARGS['timeout'],
             no_verification=CLI_ARGS['nvc'],
             ca_certs=CLI_ARGS['cacerts'],
-            use_pull_operations=use_pull_operations)
+            use_pull_operations=use_pull_operations,
+            stats_enabled=self.stats_enabled)
 
         # enable saving of xml for display
         self.conn.debug = CLI_ARGS['debug']
@@ -141,6 +145,11 @@ class ClientTest(unittest.TestCase):
 
     def tearDown(self):
         """Close the test_client YAML file."""
+
+        if self.stats_enabled:
+            print('%s: Test time %.2f sec.' % (self.id(),
+                                               (time.time() - self.start_time)))
+            print('%s\n%s' % (self.id(), self.conn.statistics.display()))
 
         if self.yamlfp is not None:
             self.yamlfp.close()
@@ -2550,6 +2559,14 @@ class Associators(ClientTest):
             for inst in ref_insts:
                 self.assertEqual(inst.classname, 'PyWBEM_PersonCollection')
 
+    def test_invalid_classname(self):
+        """Test fail with invalid classname"""
+        try:
+            self.cimcall(self.conn.Associators, 'CIM_BlanBlahBlah')
+        except CIMError as ce:
+            if ce.args[0] != CIM_ERR_INVALID_PARAMETER:
+                raise
+
     @unittest.skipIf(SKIP_LONGRUNNING_TEST, 'skip long test')
     def test_all_class_associators(self):
         """Test getting associator classes for all classes in a namespace."""
@@ -2698,6 +2715,14 @@ class AssociatorNames(ClientTest):
             self.assertTrue(len(ref_inst_names) > 0)
             self.assertInstanceNamesValid(ref_inst_names)
 
+    def test_invalid_classname(self):
+        """Test fail with invalid classname"""
+        try:
+            self.cimcall(self.conn.AssociatorNames, 'CIM_BlanBlahBlah')
+        except CIMError as ce:
+            if ce.args[0] != CIM_ERR_INVALID_PARAMETER:
+                raise
+
     @unittest.skipIf(SKIP_LONGRUNNING_TEST, 'skip long test')
     def test_all_class_associatornames(self):
         """Test getting associator classes for all classes in a namespace."""
@@ -2805,6 +2830,14 @@ class References(ClientTest):
                 self.assertEqual(inst.classname,
                                  PYWBEM_MEMBEROFPERSONCOLLECTION)
 
+    def test_invalid_classname(self):
+        """Test fail with invalid classname"""
+        try:
+            self.cimcall(self.conn.References, 'CIM_BlanBlahBlah')
+        except CIMError as ce:
+            if ce.args[0] != CIM_ERR_INVALID_PARAMETER:
+                raise
+
 
 class ReferenceNames(ClientTest):
 
@@ -2885,6 +2918,14 @@ class ReferenceNames(ClientTest):
             # for inst in ref_insts:
             #    self.assertEqual(inst.classname,
             #        PYWBEM_MEMBEROFPERSONCOLLECTION)
+
+    def test_invalid_classname(self):
+        """Test fail with invalid classname"""
+        try:
+            self.cimcall(self.conn.ReferenceNames, 'CIM_BlanBlahBlah')
+        except CIMError as ce:
+            if ce.args[0] != CIM_ERR_INVALID_PARAMETER:
+                raise
 
 
 #################################################################
@@ -5383,7 +5424,7 @@ class IterAssociatorInstancePaths(PegasusServerTestBase):
 
 class IterQueryInstances(PegasusServerTestBase):
 
-    def test_simple_iter_queryinstances(self):
+    def test_simple_iter_queryinstances(self):  # pylint: disable=invalid-name
         try:
             # Simplest invocation
 
@@ -6383,7 +6424,7 @@ def parse_args(argv_):
         print('    -nvc                Do not verify server certificates.')
         print('    --cacerts           File/dir with ca certificate(s).')
         print('    --yamlfile yamlfile  Test_client YAML file to be recorded.')
-
+        print('    -nostats            If set, statistics are not displayed.')
         print('    UT_OPTS             Unittest options (see below).')
         print('    UT_CLASS            Name of testcase class (e.g.\n'
               '                        EnumerateInstances).')
@@ -6430,6 +6471,7 @@ def parse_args(argv_):
     args_['nvc'] = None
     args_['yamlfile'] = None
     args_['long_running'] = None
+    args_['nostats'] = None
 
     # options must proceed arguments
     while True:
@@ -6453,6 +6495,9 @@ def parse_args(argv_):
             del argv[1:2]
         elif argv[1] == '-d':
             args_['debug'] = True
+            del argv[1:2]
+        elif argv[1] == '-nostats':
+            args_['nostats'] = True
             del argv[1:2]
         elif argv[1] == '-l':
             args_['long_running'] = True
@@ -6499,6 +6544,7 @@ def main():
         print("  cacerts: %s" % CLI_ARGS['cacerts'])
         print("  timeout: %s" % CLI_ARGS['timeout'])
         print("  verbose: %s" % CLI_ARGS['verbose'])
+        print("  nostats: %s" % CLI_ARGS['nostats'])
         print("  debug: %s" % CLI_ARGS['debug'])
         print("  yamlfile: %s" % CLI_ARGS['yamlfile'])
         print("  long_running: %s" % CLI_ARGS['long_running'])
