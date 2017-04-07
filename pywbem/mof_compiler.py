@@ -1595,6 +1595,7 @@ def p_instanceDeclaration(p):
             raise
     path = CIMInstanceName(cname, namespace=ns)
     inst = CIMInstance(cname, qualifiers=quals, path=path)
+    keybindings = NocaseDict()   # dictionary to build kb if alias exists
 
     for prop in props:
         pname = prop[1]
@@ -1621,7 +1622,6 @@ def p_instanceDeclaration(p):
             pprop.value = tocimobj(cprop.type, pval)
             inst.properties[pname] = pprop
             # if alias and this is key property, add keybinding
-            keybindings = NocaseDict()
             if alias and 'key' in cprop.qualifiers:
                 keybindings[pname] = atomic_to_cim_xml(pprop.value)
 
